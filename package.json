@@ -1,6 +1,9 @@
 {
   "name": "my-first-app",
   "version": "0.0.0",
+  "prettier": {
+    "singleQuote": true
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
