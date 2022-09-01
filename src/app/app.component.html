@@ -29,15 +29,20 @@
               class="form-control"
               formControlName="email"
             />
-            <span
-              *ngIf="
-                !signupForm.get('userData.email').valid &&
-                signupForm.get('userData.email').touched
-              "
-              class="help-block"
+            <span *ngIf="userData.get('email')?.hasError('required')"
+              >請輸入email</span
             >
-              請輸入email
-            </span>
+            <span *ngIf="userData.get('email')?.hasError('email')"
+              >請輸入正確的email格式</span
+            >
+            <span *ngIf="userData.get('email')?.hasError('maxlength')">
+              最長只能{{
+                userGroup.get('email')?.getError('maxlength').requiredLength
+              }}－你輸入
+              {{
+                userGroup.get('email')?.getError('maxlength').actualLength
+              }}</span
+            >
           </div>
         </div>
         <div class="radio" *ngFor="let gender of genders">
