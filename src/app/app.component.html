@@ -35,13 +35,19 @@
             <span *ngIf="userData.get('email')?.hasError('email')"
               >請輸入正確的email格式</span
             >
+            <span *ngIf="userData.get('email')?.hasError('isNotGmail')"
+              >只能使用 Gmail 信箱</span
+            >
+            <span *ngIf="userData.get('email')?.hasError('shouldBeUnique')"
+              >這個信箱已經註冊過了</span
+            >
             <span *ngIf="userData.get('email')?.hasError('maxlength')">
               最長只能{{
                 userGroup.get('email')?.getError('maxlength').requiredLength
-              }}－你輸入
+              }}個字元 －你輸入了
               {{
                 userGroup.get('email')?.getError('maxlength').actualLength
-              }}</span
+              }}個字元</span
             >
           </div>
         </div>
