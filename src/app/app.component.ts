@@ -43,6 +43,18 @@ export class AppComponent implements OnInit {
     this.signupForm.valueChanges.subscribe((value) => console.log(value));
 
     this.signupForm.statusChanges.subscribe((status) => console.log(status));
+
+    // 設定全部值
+    this.signupForm.setValue({
+      userData: { username: 'Max', email: 'max@test.com' },
+      gender: 'female',
+      hobbies: [],
+    });
+
+    // 修改部份值
+    this.signupForm.patchValue({
+      userData: { username: 'Anna' },
+    });
   }
 
   // 限制信箱 Domain (同步驗證)
@@ -94,6 +106,13 @@ export class AppComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.signupForm);
+    // 全部清空
+    this.signupForm.reset();
+
+    // 清空時重設指定值
+    this.signupForm.reset({
+      userData: { username: 'Anna' },
+    });
   }
 
   onAddHobby() {
