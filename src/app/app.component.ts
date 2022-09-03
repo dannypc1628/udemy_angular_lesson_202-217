@@ -32,13 +32,8 @@ export class AppComponent implements OnInit {
         ]),
         email: new FormControl(
           null,
-          [
-            Validators.maxLength(5),
-            Validators.email,
-            Validators.required,
-            this.checkMailDomain,
-          ],
-          [this.shouldBeUnique]
+          [Validators.maxLength(15), Validators.email, Validators.required],
+          [this.forbiddenEmails]
         ),
       }),
       gender: new FormControl('male'),
@@ -107,5 +102,19 @@ export class AppComponent implements OnInit {
       return { nameIsForbidden: true };
     }
     return null;
+  }
+
+  forbiddenEmails(control: FormControl): Promise<any> | Observable<any> {
+    const promise = new Promise<any>((resolve, reject) => {
+      setTimeout(() => {
+        if (control.value === 'test@test.com') {
+          resolve({ emailIsForbidden: true });
+        } else {
+          resolve(null);
+        }
+      }, 1500);
+    });
+
+    return promise;
   }
 }
